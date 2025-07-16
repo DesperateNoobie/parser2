@@ -1,6 +1,7 @@
 package org.example;
 
 
+import org.apache.logging.log4j.core.appender.ConsoleAppender;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 
@@ -18,6 +19,9 @@ public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
+
+
+
         logger.info("Начало работы парсера");
         LocalDate datenow = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -41,9 +45,10 @@ public class Main {
                         line.append("\t");
                     }
                 }
-                logger.info("Успешное получение информации");
                 System.out.println(line.toString());
+
             }
+            logger.info("Успешное получение информации");
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
                 StringBuilder line = new StringBuilder();
@@ -59,7 +64,7 @@ public class Main {
             //System.out.println(titleElem.text());
         }catch (Exception exception)
         {
-            logger.info("Ошибка  парсера");
+            logger.fatal("Ошибка  парсера");
             exception.printStackTrace();
         }
 
